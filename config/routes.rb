@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  # root "articles#index"
+  root "tweets#index"
   get "/users" => "users#index"
   get "/signup" => "users#new"
   post "/users" => "users#create"
@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post "relationships" => "relationships#create"
   delete "relationships/:id" => "relationships#destroy"
 
-  get "/tweets" => "tweets#index"
+  get "/myfeed" => "tweets#index"
   get "/tweets/new" => "tweets#new"
   post "/tweets" => "tweets#create"
 end

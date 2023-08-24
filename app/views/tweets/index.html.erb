@@ -1,6 +1,12 @@
-<h1>All tweets</h1>
+<h1>My feed</h1>
+<a href="/logout">Log out</a>
+<a href="/users">View all users</a>
+
+
+<a href="/tweets/new">New tweet</a>
 <% @tweets.each do |tweet| %>
   <h2><%= tweet.user.name %></h2>
   <p><%= tweet.text %></p>
   <img src=<%= tweet.image_url%> alt="tweet picture" width="100" height="100">
 <%end%>
+

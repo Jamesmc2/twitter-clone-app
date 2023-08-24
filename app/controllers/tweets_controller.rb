@@ -1,6 +1,12 @@
 class TweetsController < ApplicationController
   def index
-    @tweets = Tweet.all
+    relationships = Relationship.where(follower_id: current_user.id)
+    @tweets = []
+    relationships.each do |relationship|
+      @tweets += Tweet.where(user_id: relationship.leader_id)
+    end
+    @tweets += Tweet.where(user_id: current_user.id)
+
     render :index
   end
 
@@ -16,7 +22,7 @@ class TweetsController < ApplicationController
       image_url: params[:tweet][:image_url],
     )
     if @tweet.save
-      redirect_to "/tweets"
+      redirect_to "/myfeed"
     end
   end
 end
