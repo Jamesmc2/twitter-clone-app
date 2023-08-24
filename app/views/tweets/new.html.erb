@@ -1,0 +1,15 @@
+<h1>New Tweet</h1>
+<%= form_with model: @tweet do |form| %>
+  <div>
+    <%= form.label :text %>
+    <%= form.text_field :text %>
+  </div>
+  <div>
+    <%= form.label :image_url %>
+    <%= form.text_field :image_url %>
+  </div>
+ 
+  <div>
+    <%= form.submit %>
+  </div>
+<% end%>

@@ -13,4 +13,8 @@ Rails.application.routes.draw do
 
   post "relationships" => "relationships#create"
   delete "relationships/:id" => "relationships#destroy"
+
+  get "/tweets" => "tweets#index"
+  get "/tweets/new" => "tweets#new"
+  post "/tweets" => "tweets#create"
 end
