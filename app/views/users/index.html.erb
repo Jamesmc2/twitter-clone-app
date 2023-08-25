@@ -3,7 +3,7 @@
 <a href="/myfeed">My feed</a>
 
 <% @users.each do |user| %>
-  <h2><%= user.name %></h2>
+  <h2><a href = "/users/<%=user.id%>"><%= user.name %></a></h2>
   <img src=<%= user.profile_picture_url%> alt="profile picture" width="100" height="100">
   <%if Relationship.find_by(leader_id: user.id, follower_id: current_user.id) %>
     <form method="delete" action="/relationships/<%=user.id%>" class="inline">

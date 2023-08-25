@@ -5,8 +5,11 @@
 
 <a href="/tweets/new">New tweet</a>
 <% @tweets.each do |tweet| %>
-  <h2><%= tweet.user.name %></h2>
+  <h2><a href = "/users/<%=tweet.user.id%>"><%= tweet.user.name %></a></h2>
   <p><%= tweet.text %></p>
-  <img src=<%= tweet.image_url%> alt="tweet picture" width="100" height="100">
+  <% if tweet.image_url == ""%>
+  <%else%>
+    <img src=<%= tweet.image_url%> alt="tweet picture" width="100" height="100">
+  <% end%>
 <%end%>
 
