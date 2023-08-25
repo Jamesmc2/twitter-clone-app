@@ -1,11 +1,13 @@
 <h1>My feed</h1>
 <a href="/logout">Log out</a>
 <a href="/users">View all users</a>
+<a href = '/users/<%=current_user.id%>'>My Profile</a>
 
 
 <a href="/tweets/new">New tweet</a>
 <% @tweets.each do |tweet| %>
-  <h2><a href = "/users/<%=tweet.user.id%>"><%= tweet.user.name %></a></h2>
+  <h2>  <img src=<%= tweet.user.profile_picture_url%> alt="profile picture" width="50" height="50">
+<a href = "/users/<%=tweet.user.id%>"><%= tweet.user.name %></a></h2>
   <p>Tweeted at: <%=tweet.created_at.strftime('%b %e, %l:%M %p')%></p>
   <p><%= tweet.text %></p>
   <% if tweet.image_url == ""%>

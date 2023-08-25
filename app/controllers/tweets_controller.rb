@@ -26,4 +26,10 @@ class TweetsController < ApplicationController
       redirect_to "/myfeed"
     end
   end
+
+  def destroy
+    @tweet = Tweet.find_by(id: params[:tweet_id])
+    @tweet.destroy
+    redirect_to "/users/#{current_user.id}"
+  end
 end

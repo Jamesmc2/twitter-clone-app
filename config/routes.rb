@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   get "/myfeed" => "tweets#index"
   get "/tweets/new" => "tweets#new"
   post "/tweets" => "tweets#create"
+  delete "/tweets/:id" => "tweets#destroy"
 end
