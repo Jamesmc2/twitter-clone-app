@@ -6,7 +6,8 @@ class TweetsController < ApplicationController
       @tweets += Tweet.where(user_id: relationship.leader_id)
     end
     @tweets += Tweet.where(user_id: current_user.id)
-
+    @tweets = @tweets.sort_by { |tweet| tweet["created_at"] }
+    @tweets = @tweets.reverse()
     render :index
   end
 

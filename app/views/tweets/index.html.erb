@@ -6,6 +6,7 @@
 <a href="/tweets/new">New tweet</a>
 <% @tweets.each do |tweet| %>
   <h2><a href = "/users/<%=tweet.user.id%>"><%= tweet.user.name %></a></h2>
+  <p>Tweeted at: <%=tweet.created_at.strftime('%b %e, %l:%M %p')%></p>
   <p><%= tweet.text %></p>
   <% if tweet.image_url == ""%>
   <%else%>
