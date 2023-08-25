@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post "/users" => "users#create"
   get "/users/:id/edit" => "users#edit"
   patch "/users/:id" => "users#update"
+  get "/users/:id/liked_tweets" => "users#liked_tweets"
 
   get "/login" => "sessions#new"
   post "/sessions" => "sessions#create"

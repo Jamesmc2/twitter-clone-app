@@ -6,6 +6,8 @@
   <a href="/tweets/new">New tweet</a>
   <a href="/users/<%=current_user.id%>/edit">Edit profile</a>
 <%end%>
+<a href="/users/<%=@user.id%>/liked_tweets">Liked tweets</a>
+
 
   <%if Relationship.find_by(leader_id: @user.id, follower_id: current_user.id) %>
     <form method="delete" action="/relationships/<%=@user.id%>" class="inline">
@@ -32,6 +34,24 @@
     <%else%>
       <img src=<%= tweet.image_url%> alt="tweet picture" width="100" height="100">
     <% end%>
+    <%if Like.find_by(tweet_id: tweet.id, user_id: current_user.id) %>
+    <form method="delete" action="/likes/<%=Like.find_by(tweet_id: tweet.id, user_id: current_user.id).id%>" class="inline">
+
+      <button type="submit" name="submit_param" value="submit_value" class="link-button">
+      Unlike
+      </button>
+      Likes: <%= Like.where(tweet_id: tweet.id).count%>
+
+    </form>
+    <%else%>
+    <form method="post" action="/likes" class="inline">
+      <input type="hidden" name="tweet_id" value=<%=tweet.id %> >
+      <button type="submit" name="submit_param" value="submit_value" class="link-button">
+      Like
+      </button>
+      Likes: <%= Like.where(tweet_id: tweet.id).count%>
+    </form>
+    <%end%>
     <%if current_user.id == @user.id%>
       <form method="delete" action="/tweets/<%=tweet.id%>" class="inline">
       <input type="hidden" name="tweet_id" value=<%=tweet.id %> >

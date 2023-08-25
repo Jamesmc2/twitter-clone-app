@@ -48,4 +48,9 @@ class UsersController < ApplicationController
     )
     redirect_to "/users/#{current_user.id}"
   end
+
+  def liked_tweets
+    @liked_tweets = Like.where(user_id: params[:id])
+    render :liked_tweets
+  end
 end

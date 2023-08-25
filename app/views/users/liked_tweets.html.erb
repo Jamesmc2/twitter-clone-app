@@ -1,0 +1,35 @@
+<h1>Liked Tweets</h1>
+<a href="/logout">Log out</a>
+<a href = '/myfeed'>My feed</a>
+<a href = '/users/<%=current_user.id%>'>My Profile</a>
+
+<% @liked_tweets.each do |tweet| %>
+  <h2>  <img src=<%= tweet.tweet.user.profile_picture_url%> alt="profile picture" width="50" height="50">
+<a href = "/users/<%=tweet.tweet.user.id%>"><%= tweet.user.name %></a></h2>
+  <p>Tweeted at: <%=tweet.tweet.created_at.strftime('%b %e, %l:%M %p')%></p>
+  <p><%= tweet.tweet.text %></p>
+  <% if tweet.tweet.image_url == ""%>
+  <%else%>
+    <img src=<%= tweet.tweet.image_url%> alt="tweet picture" width="100" height="100">
+  <% end%>
+  <%if Like.find_by(tweet_id: tweet.tweet.id, user_id: current_user.id) %>
+    <form method="delete" action="/likes/<%=Like.find_by(tweet_id: tweet.tweet.id, user_id: current_user.id).id%>" class="inline">
+
+      <button type="submit" name="submit_param" value="submit_value" class="link-button">
+      Unlike
+      </button>
+      Likes: <%= Like.where(tweet_id: tweet.tweet.id).count%>
+
+    </form>
+  <%else%>
+    <form method="post" action="/likes" class="inline">
+      <input type="hidden" name="tweet_id" value=<%=tweet.tweet.id %> >
+      <button type="submit" name="submit_param" value="submit_value" class="link-button">
+      Like
+      </button>
+      Likes: <%= Like.where(tweet_id: tweet.tweet.id).count%>
+    </form>
+  <% end %>
+  <hr>
+<%end%>
+

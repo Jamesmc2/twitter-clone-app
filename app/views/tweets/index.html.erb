@@ -20,6 +20,8 @@
       <button type="submit" name="submit_param" value="submit_value" class="link-button">
       Unlike
       </button>
+      Likes: <%= Like.where(tweet_id: tweet.id).count%>
+
     </form>
   <%else%>
     <form method="post" action="/likes" class="inline">
@@ -27,6 +29,7 @@
       <button type="submit" name="submit_param" value="submit_value" class="link-button">
       Like
       </button>
+      Likes: <%= Like.where(tweet_id: tweet.id).count%>
     </form>
   <% end %>
   <hr>
