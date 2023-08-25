@@ -29,4 +29,23 @@ class UsersController < ApplicationController
       render :new, status: :unprocessable_entity
     end
   end
+
+  def edit
+    if current_user.id == params[:id].to_i
+      @user = current_user
+      render :edit
+    else
+      redirect_to "/myfeed"
+    end
+  end
+
+  def update
+    @user = User.find_by(id: current_user.id)
+    @user.update(
+      name: params[:user][:name],
+      email: params[:user][:email],
+      profile_picture_url: params[:user][:profile_picture_url],
+    )
+    redirect_to "/users/#{current_user.id}"
+  end
 end

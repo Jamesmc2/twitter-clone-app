@@ -4,6 +4,7 @@
 <a href="/myfeed">My feed</a>
 <%if current_user.id == @user.id%>
   <a href="/tweets/new">New tweet</a>
+  <a href="/users/<%=current_user.id%>/edit">Edit profile</a>
 <%end%>
 
   <%if Relationship.find_by(leader_id: @user.id, follower_id: current_user.id) %>
@@ -24,7 +25,7 @@
   <%tweets = @user.tweets.order(created_at: :desc)%>
   <%tweets.each do |tweet|%>
     <h2>  <img src=<%= tweet.user.profile_picture_url%> alt="profile picture" width="50" height="50">
-<%= tweet.user.name %></h2>
+          <%= tweet.user.name %></h2>
     <p>Tweeted at: <%=tweet.created_at.strftime('%b %e, %l:%M %p')%></p>
     <p><%= tweet.text %></p>
     <% if tweet.image_url == ""%>
@@ -39,4 +40,5 @@
       </button>
     </form>
     <%end%>
+    <hr>
   <%end%>
